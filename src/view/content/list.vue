@@ -5,7 +5,7 @@
       <el-button type="primary" @click="AddContent">新增期刊</el-button>
     </div>
     <div class="list-content">
-      <el-table :data="contentList">
+      <el-table :data="currentContentList">
         <el-table-column type="index" label="序号" width="60"></el-table-column>
         <el-table-column prop="type" label="类型">
           <template slot-scope="scope">
@@ -102,7 +102,7 @@ export default {
   data() {
     return {
       page: 1,
-      rows: 10,
+      rows: 4,
       total: 0,
       type: {
         100: '电影',
@@ -142,14 +142,20 @@ export default {
   components: {
     UploadImgs
   },
+  computed: {
+    currentContentList() {
+      return this.contentList.slice((this.page - 1) * this.rows, this.page * this.rows)
+    }
+  },
   methods: {
     async getContentList() {
       const res = await ContentModel.getContentList()
       this.contentList = res
+      this.total = res.length
       console.log(res)
     },
-    handleCurrentChange() {
-
+    handleCurrentChange(val) {
+      this.page = val
     },
     AddContent() {
       this.title = '新增期刊'

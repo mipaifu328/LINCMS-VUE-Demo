@@ -1,5 +1,5 @@
 import { get, post, _delete, put } from '@/lin/plugin/axios'
-
+/* eslint-disablec */
 // 我们通过 class 这样的语法糖使模型这个概念更加具象化，其优点：耦合性低、可维护性。
 class Content {
   // constructor() {}

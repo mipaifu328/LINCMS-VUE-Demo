@@ -15,7 +15,6 @@
         <el-table-column prop="title" label="标题"></el-table-column>
         <el-table-column prop="content" label="内容" ></el-table-column>
         <el-table-column prop="fav_nums" label="点赞数" ></el-table-column>
-        <!-- <el-table-column prop="image" label="图片" ></el-table-column> -->
         <el-table-column prop="status" label="状态">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.status === 1" type="success">有效</el-tag>
@@ -46,7 +45,7 @@
       :title=title
       :visible.sync="dialogVisible"
       @close="resetForm">
-      <el-form :model="contentObj" :rules="rules" ref="contentForm" label-width="100px" >
+      <el-form :model="contentObj" :rules="rules" ref="contentForm" label-width="120px" >
         <el-form-item label="封面图片" prop="image">
           <upload-imgs ref="uploadEle" :value="imageData" :max-num="1"/>
         </el-form-item>
@@ -163,6 +162,7 @@ export default {
     },
     resetForm() {
       this.imageData = []
+      this.contentObj = {}
       this.$refs.contentForm.resetFields()
     },
     async add() {
